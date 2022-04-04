@@ -2,13 +2,20 @@ import React from 'react'
 
 import Logo from '../img/logo.png';
 import Avatar from '../img/avatar.png';
+import Loading from '../img/loading.gif';
 
 import { BsHandbag } from 'react-icons/bs';
 // framer motion to apply animations
 import { motion } from 'framer-motion';
 
+import login from '../helper/login';
+import { useSelector } from 'react-redux';
+
 
 export default function Header() {
+
+    const userState = useSelector( state => state.user )
+  
     return (
         <>
             <motion.header 
@@ -77,12 +84,20 @@ export default function Header() {
 
                     </motion.div>
                     {/* avatar */}
-                    <motion.div 
-                        className='w-8 h-8 md:w-10 md:h-10 ml-6 cursor-pointer rounded-full drop-shadow-lg hover:drop-shadow-xl'
-                        whileTap={{scale: .7}}
-                    >
-                        <img src={Avatar} alt="user avatar" className='w-full h-full' />
-                    </motion.div>
+                    {
+                        userState.loading ? 
+                        <img src={Loading}
+                             alt="loading"
+                             className='w-8 h-8 md:w-10 md:h-10 ml-6 cursor-pointer rounded-full drop-shadow-lg hover:drop-shadow-xl'
+                        /> :   
+                        <motion.div 
+                            className='w-8 h-8 md:w-10 md:h-10 ml-6 cursor-pointer rounded-full drop-shadow-lg hover:drop-shadow-xl'
+                            whileTap={{scale: .7}}
+                            onClick = { login }
+                        >
+                            <img src={userState.user ? userState.user.photoURL : Avatar} alt="user avatar" className='w-full h-full rounded-full' />
+                        </motion.div>
+                    }
                 </div>
             </motion.header>
         </>
