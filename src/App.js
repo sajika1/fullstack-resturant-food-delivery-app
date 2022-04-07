@@ -7,6 +7,7 @@ import { AnimatePresence } from 'framer-motion';
 import { useDispatch } from "react-redux";
 import { fetchUser } from "./redux/user/userActions";
 import { useSelector } from "react-redux";
+import Maincontainer from "./Components/MainContainer";
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
         <AnimatePresence>
           <Navforsmalldevice />
           <Header />
+          <Maincontainer />
         </AnimatePresence>
     </div>
   );

@@ -20,10 +20,10 @@ export default function Navforsmalldevice() {
              {/* for small devices */}     
              <motion.div
                     className='fixed w-12 h-12 rounded-full bottom-7 right-5
-                            bg-gradient-to-b from-slate-100 via-slate-200 to-slate-300/70
-                            hover:from-white hover:to-slate-300 text-2xl
+                            bg-gradient-to-b from-orange-100 via-orange-200 to-orange-400/70
+                            hover:from-white hover:to-orange-300 text-2xl
                             flex items-center justify-center z-50
-                            cursor-pointer md:hidden drop-shadow-md
+                            cursor-pointer md:hidden drop-shadow-sm text-stone-700
                             '
                     initial={{y:500}}
                     animate={{y:0}}
@@ -35,7 +35,7 @@ export default function Navforsmalldevice() {
                 </motion.div>
 
                 <motion.div className={`absolute bottom-0 w-screen  ${enableNav ? 'left-0' : '-left-full'}
-                            bg-gradient-to-b from-white via-slate-100 to-slate-200 px-4 pt-12 pb-16 md:hidden
+                            bg-gradient-to-b from-white via-orange-100 to-orange-200 px-4 pt-12 pb-16 md:hidden
                             transition-all duration-300 ease-in-out z-40`}
                 >
                     <ul className='flex flex-col gap-6 items-center uppercase'>

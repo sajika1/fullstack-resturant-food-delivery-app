@@ -34,7 +34,7 @@ export default function Header() {
                 </motion.div>
                 
                 {/* navbar */}
-                <nav className='flex items-center gap-10 ml-auto mr-6 xl:mx-auto hidden md:block'>
+                <nav className='items-center gap-10 ml-auto mr-6 xl:mx-auto hidden md:flex'>
                     <ul className='flex items-center lg:gap-6 gap-4'>
                         <motion.li 
                             className='cursor-pointer text-sm 2xl:text-lg font-light text-stone-500 first-letter:uppercase '
