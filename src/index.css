@@ -25,6 +25,10 @@ body{
 @tailwind utilities;
 
 /* custom classes */
-.section{
+.section {
   @apply px-4 md:px-12 lg:px-16 xl:px-28 2xl:px-48;
+}
+
+.header__item {
+  @apply cursor-pointer text-sm 2xl:text-lg font-light text-stone-500 first-letter:uppercase;
 }

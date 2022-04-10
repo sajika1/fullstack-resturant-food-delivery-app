@@ -1,25 +1,35 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import Logo from '../img/logo.png';
 import Avatar from '../img/avatar.png';
 import Loading from '../img/loading.gif';
 
 import { BsHandbag } from 'react-icons/bs';
+import { VscSignIn } from 'react-icons/vsc';
+import { IoExitOutline } from 'react-icons/io5';
+
 // framer motion to apply animations
 import { motion } from 'framer-motion';
 
 import login from '../helper/login';
 import { useSelector } from 'react-redux';
+import signOutAccount from '../helper/signOutAccount';
 
 
 export default function Header() {
 
-    const userState = useSelector( state => state.user )
-  
+    const userState = useSelector( state => state.user );
+    const [openMenu, setOpenMenu] = useState(false);
+
+    const handleOpen = () => {
+        setOpenMenu(!openMenu)
+    }
+
     return (
         <>
             <motion.header 
-                className='w-screen h-auto flex justify-between items-center py-4 md:py-6 section'
+                className='sticky top-0 bg-white w-screen h-auto flex justify-between items-center
+                            py-4 section shadow-sm z-50'
                 initial={{y:-500}}
                 animate={{y:0}}
                 transition={{type:'spring' , duration: 0.8 , stiffness:100}}
@@ -30,32 +40,34 @@ export default function Header() {
                     whileTap={{ scale:.9 }}
                 >
                     <img src={Logo} alt="logo" className='w-6 h-6 md:w-8 md:h-8' />
-                    <p className='font-light text-sm md:text-base text-slate-600 hidden sm:block'>food delivery</p>
+                    <p className='font-light text-sm md:text-base text-slate-600 hidden sm:block'>
+                        food delivery
+                    </p>
                 </motion.div>
                 
                 {/* navbar */}
                 <nav className='items-center gap-10 ml-auto mr-6 xl:mx-auto hidden md:flex'>
                     <ul className='flex items-center lg:gap-6 gap-4'>
                         <motion.li 
-                            className='cursor-pointer text-sm 2xl:text-lg font-light text-stone-500 first-letter:uppercase '
+                            className='header__item'
                             whileHover={{color:'tomato'}}
                             whileTap={{scale: .7}}
                             transition={{type:'spring' , stiffness:500}}
                         >home</motion.li>
                         <motion.li 
-                            className='cursor-pointer text-sm 2xl:text-lg font-light text-stone-500 first-letter:uppercase '
+                            className='header__item'
                             whileHover={{color:'tomato'}}
                             whileTap={{scale: .7}}
                             transition={{type:'spring' , stiffness:500 }}
                         >menu</motion.li>
                         <motion.li 
-                            className='cursor-pointer text-sm 2xl:text-lg font-light text-stone-500 first-letter:uppercase '
+                            className='header__item '
                             whileHover={{color:'tomato'}}
                             whileTap={{scale: .7}}
                             transition={{type:'spring' , stiffness:500}}
                         >about us</motion.li>
                         <motion.li 
-                            className='cursor-pointer text-sm 2xl:text-lg font-light text-stone-500 first-letter:uppercase '
+                            className='header__item'
                             whileHover={{color:'tomato'}}
                             whileTap={{scale: .7}}
                             transition={{type:'spring' , stiffness:500}}
@@ -63,7 +75,7 @@ export default function Header() {
                     </ul>
 
                 </nav>
-                <div className='flex items-center gap-0 md:gap-2'>
+                <div className='flex items-center gap-0 md:gap-2 relative'>
                     {/* bag */}
                     <motion.div 
                         className='cursor-pointer relative'
@@ -88,16 +100,53 @@ export default function Header() {
                         userState.loading ? 
                         <img src={Loading}
                              alt="loading"
-                             className='w-8 h-8 md:w-10 md:h-10 ml-6 cursor-pointer rounded-full drop-shadow-lg hover:drop-shadow-xl'
+                             className='w-8 h-8 md:w-10 md:h-10 ml-6 cursor-pointer rounded-full 
+                                        drop-shadow-lg hover:drop-shadow-xl'
+                            onClick = { handleOpen }
                         /> :   
                         <motion.div 
-                            className='w-8 h-8 md:w-10 md:h-10 ml-6 cursor-pointer rounded-full drop-shadow-lg hover:drop-shadow-xl'
+                            className='w-8 h-8 md:w-10 md:h-10 ml-6 cursor-pointer 
+                                        rounded-full drop-shadow-lg hover:drop-shadow-xl'
                             whileTap={{scale: .7}}
-                            onClick = { login }
+                            onClick = { handleOpen }
                         >
-                            <img src={userState.user ? userState.user.photoURL : Avatar} alt="user avatar" className='w-full h-full rounded-full' />
+                            <img src={userState.user ? userState.user.photoURL : Avatar} 
+                                alt="user avatar"
+                                className='w-full h-full rounded-full' 
+                            />
                         </motion.div>
                     }
+                    <div className={`${openMenu ? 'flex' : 'hidden'} absolute top-12 w-max z-50 
+                                    bg-slate-50 shadow-sm  
+                                    rounded-lg right-0 flex-col`}>
+                
+                        {
+                            !userState.user &&
+                                <div onClick = { () => {
+                                    handleOpen()
+                                    login()
+                                } }
+                                className='flex items-center gap-2 text-xs py-4 px-6 hover:bg-slate-100
+                                            rounded-t-lg transition-all duration-300 ease-linear'
+                                >
+                                    <VscSignIn className='text-lg'/> 
+                                    <span className='self-end'>Sign in</span>
+                                </div>         
+                        }
+
+                        {/* exit from account */}
+                        <div onClick = { () => {
+                            handleOpen()
+                            signOutAccount()
+                        } }
+                            className='flex items-center gap-2 text-xs py-4 px-6 hover:bg-slate-100
+                                        rounded-b-lg transition-all duration-300 ease-linear'
+                        >
+                            <IoExitOutline className='text-lg'/> 
+                            <span className='self-end'>Exit from Account</span>
+                        </div>
+                    </div>
+
                 </div>
             </motion.header>
         </>

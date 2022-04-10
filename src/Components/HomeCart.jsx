@@ -8,7 +8,11 @@ export default function Homecart({name , image , categorie , price}) {
         <>
             <motion.div 
                 className='relative bg-slate-100 bg-opacity-50 backdrop-filter backdrop-blur-lg
-                            flex flex-col items-center justify-between p-4 border- lg:border-0 border-white rounded-lg cursor-pointer'
+                            flex flex-col items-center justify-between p-4 border- lg:border-0 
+                            border-white rounded-lg cursor-pointer'
+                initial={{x:-500}}
+                animate={{x:0}}
+                transition={{type:'spring' , duration:0.8 }}
                 whileHover={{scale:1.03 , backgroundColor:'#f1f1f1' }}
                 whileTap={{scale:0.9}}
             >

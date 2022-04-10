@@ -6,8 +6,15 @@ import { AnimatePresence } from 'framer-motion';
 
 import { useDispatch } from "react-redux";
 import { fetchUser } from "./redux/user/userActions";
+// when app is mounted , set user into initial state in the redux store
 import { useSelector } from "react-redux";
+
+//* SPA 
+import { Routes , Route } from 'react-router-dom';
+
+//* COMPONENTS
 import Maincontainer from "./Components/MainContainer";
+import Createitem from "./Components/CreateItem";
 
 function App() {
 
@@ -16,14 +23,18 @@ function App() {
 
   useEffect(()=> {
       !user && dispatch(fetchUser())
-  }, [])
+  }, [user , dispatch])
 
   return (
     <div>
         <AnimatePresence>
           <Navforsmalldevice />
           <Header />
-          <Maincontainer />
+          <Routes>
+            <Route path="/" element={ <Maincontainer /> }/>
+            <Route path="./create" element={ <Createitem /> }/>
+          </Routes>
+          
         </AnimatePresence>
     </div>
   );

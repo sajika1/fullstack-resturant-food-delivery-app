@@ -34,32 +34,35 @@ export default function Navforsmalldevice() {
         
                 </motion.div>
 
-                <motion.div className={`absolute bottom-0 w-screen  ${enableNav ? 'left-0' : '-left-full'}
-                            bg-gradient-to-b from-white via-orange-100 to-orange-200 px-4 pt-12 pb-16 md:hidden
-                            transition-all duration-300 ease-in-out z-40`}
+                <motion.div className={`fixed bottom-0 w-screen  ${enableNav ? 'left-0' : '-left-full'}
+                            bg-gradient-to-b from-white via-orange-100 to-orange-200 px-4 pt-12
+                             pb-16 md:hidden transition-all duration-300 ease-in-out z-40`}
                 >
-                    <ul className='flex flex-col gap-6 items-center uppercase'>
+                    <ul className='flex flex-col items-center uppercase'>
+                        {/* use padding for each li for handle spoacing bug on phones
+                            (gap is not work)
+                        */}
                         <motion.li
                             onClick={ handleClick }
-                            className='cursor-pointer' 
+                            className='cursor-pointer pb-4' 
                             whileHover={{scale:1.3}}
                             whileTap={{scale: 0.7}}
                         >home</motion.li>
                         <motion.li
                             onClick={ handleClick }
-                            className='cursor-pointer' 
+                            className='cursor-pointer py-4' 
                             whileHover={{scale:1.1}}
                             whileTap={{scale: 0.7}}
                         >menu</motion.li>
                         <motion.li
                             onClick={ handleClick }
-                            className='cursor-pointer' 
+                            className='cursor-pointer py-4' 
                             whileHover={{scale:1.1}}
                             whileTap={{scale: 0.7}}
                         >about us</motion.li>
                         <motion.li
                             onClick={ handleClick }
-                            className='cursor-pointer' 
+                            className='cursor-pointer pt-4' 
                             whileHover={{scale:1.1}}
                             whileTap={{scale: 0.7}}
                         >services</motion.li>
