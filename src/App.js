@@ -10,7 +10,7 @@ import { fetchUser } from "./redux/user/userActions";
 import { useSelector } from "react-redux";
 
 //* SPA 
-import { Routes , Route } from 'react-router-dom';
+import { Routes , Route, useLocation } from 'react-router-dom';
 
 //* COMPONENTS
 import Maincontainer from "./Components/MainContainer";
@@ -25,10 +25,12 @@ function App() {
       !user && dispatch(fetchUser())
   }, [user , dispatch])
 
+  const location = useLocation();
+
   return (
     <div>
         <AnimatePresence>
-          <Navforsmalldevice />
+          { location.pathname !== '/create' && <Navforsmalldevice /> }
           <Header />
           <Routes>
             <Route path="/" element={ <Maincontainer /> }/>
