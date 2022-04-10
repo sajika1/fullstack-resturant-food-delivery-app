@@ -32,7 +32,7 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" element={ <Maincontainer /> }/>
-            <Route path="./create" element={ <Createitem /> }/>
+            <Route path="/create" element={ <Createitem /> }/>
           </Routes>
           
         </AnimatePresence>

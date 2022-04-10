@@ -1,24 +1,25 @@
 import React, { useState } from 'react'
-
-import Logo from '../img/logo.png';
-import Avatar from '../img/avatar.png';
-import Loading from '../img/loading.gif';
-
-import { BsHandbag } from 'react-icons/bs';
-import { VscSignIn } from 'react-icons/vsc';
-import { IoExitOutline } from 'react-icons/io5';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 // framer motion to apply animations
 import { motion } from 'framer-motion';
 
-import login from '../helper/login';
-import { useSelector } from 'react-redux';
-import signOutAccount from '../helper/signOutAccount';
+// IMAGES
+import Logo from '../img/logo.png';
+import Avatar from '../img/avatar.png';
+import Loading from '../img/loading.gif';
 
+// ICONS - use react-icons package
+import { BsHandbag } from 'react-icons/bs';
+
+//* COMPONENTS AND HELPER FUNCTIONS
+import Avatarmenu from './AvatarMenu';
 
 export default function Header() {
 
     const userState = useSelector( state => state.user );
+
     const [openMenu, setOpenMenu] = useState(false);
 
     const handleOpen = () => {
@@ -40,9 +41,9 @@ export default function Header() {
                     whileTap={{ scale:.9 }}
                 >
                     <img src={Logo} alt="logo" className='w-6 h-6 md:w-8 md:h-8' />
-                    <p className='font-light text-sm md:text-base text-slate-600 hidden sm:block'>
+                    <Link to="/" className='font-light text-sm md:text-base text-slate-600 hidden sm:block'>
                         food delivery
-                    </p>
+                    </Link>
                 </motion.div>
                 
                 {/* navbar */}
@@ -116,36 +117,9 @@ export default function Header() {
                             />
                         </motion.div>
                     }
-                    <div className={`${openMenu ? 'flex' : 'hidden'} absolute top-12 w-max z-50 
-                                    bg-slate-50 shadow-sm  
-                                    rounded-lg right-0 flex-col`}>
-                
-                        {
-                            !userState.user &&
-                                <div onClick = { () => {
-                                    handleOpen()
-                                    login()
-                                } }
-                                className='flex items-center gap-2 text-xs py-4 px-6 hover:bg-slate-100
-                                            rounded-t-lg transition-all duration-300 ease-linear'
-                                >
-                                    <VscSignIn className='text-lg'/> 
-                                    <span className='self-end'>Sign in</span>
-                                </div>         
-                        }
 
-                        {/* exit from account */}
-                        <div onClick = { () => {
-                            handleOpen()
-                            signOutAccount()
-                        } }
-                            className='flex items-center gap-2 text-xs py-4 px-6 hover:bg-slate-100
-                                        rounded-b-lg transition-all duration-300 ease-linear'
-                        >
-                            <IoExitOutline className='text-lg'/> 
-                            <span className='self-end'>Exit from Account</span>
-                        </div>
-                    </div>
+                    {/* AVATAR MENU */}
+                    <Avatarmenu openMenu={openMenu} setOpenMenu={setOpenMenu} handleOpen={handleOpen} />
 
                 </div>
             </motion.header>
