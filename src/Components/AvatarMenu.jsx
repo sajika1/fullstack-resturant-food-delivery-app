@@ -48,7 +48,7 @@ export default function Avatarmenu({ openMenu , setOpenMenu , handleOpen }) {
                                         onClick={ () => { handleOpen() }}
                                 >
                                     <IoCreateOutline className='text-lg'/>
-                                    <span className='self-end'>Create New Item</span>
+                                    <span className='self-end cursor-pointer'>Create New Item</span>
                                 </Link> 
                     }
 
@@ -63,7 +63,7 @@ export default function Avatarmenu({ openMenu , setOpenMenu , handleOpen }) {
                                         rounded-t-lg transition-all duration-300 ease-linear'
                             >
                                 <VscSignIn className='text-lg'/> 
-                                <span className='self-end'>Sign in</span>
+                                <span className='self-end cursor-pointer'>Sign in</span>
                             </div>         
                     }
 
@@ -76,7 +76,7 @@ export default function Avatarmenu({ openMenu , setOpenMenu , handleOpen }) {
                                     rounded-b-lg transition-all duration-300 ease-linear'
                     >
                         <IoExitOutline className='text-lg'/> 
-                        <span className='self-end'>Exit from Account</span>
+                        <span className='self-end cursor-pointer'>Exit from Account</span>
                     </div>
             </div>
 

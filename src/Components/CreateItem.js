@@ -11,25 +11,27 @@ import { categories } from '../data/createpageData';
 
 //* ICONS FROM react-icons
 import { MdOutlineSubtitles } from 'react-icons/md';
-
 import { AiOutlineCloudUpload , AiOutlineDollarCircle  } from 'react-icons/ai';
 import { FaTrashAlt } from 'react-icons/fa';
 import { RiHospitalLine } from 'react-icons/ri';
 
 export default function Createitem() {
 
+    // this is an array of object (declare in data directory)
     const cetegories = categories;
-
+    
     // handle errors
     const [error, setError] = useState(false)
-    // uploade image handler
+    // handle loading (for image upload section)
+    const [loading, setLoading] = useState(false);
+
+    // data about new item (handle it into the create item form)
     const [imageAsset, setImageAsset] = useState(false);
-    
     const [title, setTitle] = useState("");
     const [category, setCategory] = useState('');
-    const [loading, setLoading] = useState(false);
-    const [colories, setColories] = useState(null);
     const [price, setPrice] = useState(null);
+    const [colories, setColories] = useState(null);
+
 
 
     const uploadImage = () => {
@@ -38,7 +40,7 @@ export default function Createitem() {
 
     return (
         <>
-            <section className='mx-auto section w-[90%] md:w-[75%] h-[calc(100vh-64px)] 
+            <section className='mx-auto section w-[90%] md:w-[75%] h-[calc(100vh-64px)] md:h-auto md:py-8
                                 flex items-center justify-center'>
                 <div className="border-2 py-4 px-2 md:p-8 border-gray-200 rounded-md w-full">
                     {error ? 
@@ -75,7 +77,7 @@ export default function Createitem() {
                                         focus:border-lime-400'
                             onChange={ (e) => setCategory(e.target.value) }
                         >
-                            <option value="other">select category</option>
+                            <option value="other">Select Category</option>
                             { categories && categories.map(item =>
                                  <option key={item.id} value={item.urlParamName}>
                                     {item.name}
@@ -85,7 +87,7 @@ export default function Createitem() {
 
                          {/* upload image  */}
                         <div 
-                            className='w-full h-[225px] md:h-[415px] border-2 border-gray-200 
+                            className='w-full h-[225px] md:h-[275px] border-2 border-gray-200 
                                         p-2 rounded-md hover:border-lime-400'
                         >
                             { loading ? <Loader /> : !imageAsset ?
@@ -159,7 +161,7 @@ export default function Createitem() {
                         </div>
 
                         {/* save button */}
-                        <button className='bg-lime-400 p-2  rounded-md text-[#f9f9f9]'>Save</button>
+                        <button className='bg-lime-400 p-2 lg:w-2/3 lg:mx-auto  rounded-md text-[#f9f9f9]'>Save</button>
                     </div>
                     
                 }
